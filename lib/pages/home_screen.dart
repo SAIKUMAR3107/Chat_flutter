@@ -64,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Color(0xffF67952)),
                 title: Text('Logout'),
               ),
+              
               SizedBox(height: 20,)
             ],
           ),
