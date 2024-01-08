@@ -1,6 +1,5 @@
 import 'package:chatting_app/firebase_options.dart';
 import 'package:chatting_app/pages/splash_screen.dart';
-import 'package:chatting_app/themes/light_mode.dart';
 import 'package:chatting_app/themes/theme_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

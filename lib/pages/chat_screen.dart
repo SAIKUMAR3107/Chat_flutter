@@ -114,6 +114,8 @@ class ChatScreen extends StatelessWidget {
             //Align sender messages to right and reciever messages to left 
             var alignment = isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
 
+            print("Saikumar");
+
 
             return Column(
               crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
