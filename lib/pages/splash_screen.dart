@@ -25,7 +25,14 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        child: Center(child: Icon(Icons.chat,size: 50,)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.chat,size: 50,),
+            SizedBox(height: 10,),
+            Text("Chat With..",style: TextStyle(fontSize: 20),)
+          ],
+        ),
       ),
     );
   }
