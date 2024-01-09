@@ -4,6 +4,7 @@ import 'package:chatting_app/pages/settings_screen.dart';
 import 'package:chatting_app/services/authentication/auth_service.dart';
 import 'package:chatting_app/services/chat/chat_services.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,7 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Spacer(),
               ListTile(
-                onTap: (){
+                onTap: () async{
+                  var shared =await SharedPreferences.getInstance();
+                  shared.setBool("isLogin", false);
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
                 leading: Icon(Icons.logout,

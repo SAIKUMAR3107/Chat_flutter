@@ -2,6 +2,7 @@ import 'package:chatting_app/pages/home_screen.dart';
 import 'package:chatting_app/pages/register_screen.dart';
 import 'package:chatting_app/services/authentication/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,6 +17,11 @@ class _LoginScreenState extends State<LoginScreen> {
   bool passwordVisibility = true;
   String hintText = "";
   bool hint = false;
+
+  void shared() async{
+    var shared =await SharedPreferences.getInstance();
+    shared.setBool("isLogin", true);
+  }
 
 
 
@@ -63,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
         email.text,
         password.text,
       );
+      shared();
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => HomeScreen()));
     }
