@@ -14,21 +14,64 @@ class _LoginScreenState extends State<LoginScreen> {
   var email = TextEditingController();
   var password = TextEditingController();
   bool passwordVisibility = true;
+  String hintText = "";
+  bool hint = false;
 
-  void login() async{
+
+
+  TextEditingController validateEmail(TextEditingController email) {
+    setState(() {
+      if(email.text.endsWith("@gmail.com")){
+        hint = true;
+      }
+      else if(email.text.isEmpty){
+        hint = false;
+        
+      }
+      else{
+        hint = false;
+        hintText = "Must be ends with @gmail.com";
+      }
+    });
+    return email;
+  }
+
+  TextEditingController validatePassword(TextEditingController password) {
+    setState(() {
+      if(password.text.length>=6){
+        hint = true;
+      }
+      else if(password.text.isEmpty){
+        hint = false;
+        
+      }
+      else{
+        hint = false;
+        hintText = "must contains 6 letters";
+      }
+    });
+    return password;
+  }
+
+  void login() async {
     //Auth Service
     final authService = AuthService();
 
     //try Login
-    try{
-      await authService.signInWithEmailPassword(email.text, password.text,);
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+    try {
+      await authService.signInWithEmailPassword(
+        email.text,
+        password.text,
+      );
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeScreen()));
     }
     //catch any Error
-    catch(e){
-      showDialog(context: context, builder: (context) => AlertDialog(title: Text(e.toString())));
+    catch (e) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(title: Text(e.toString())));
     }
-
   }
 
   @override
@@ -42,12 +85,17 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Login",style: TextStyle(fontSize: 30),),
-                SizedBox(height: 30,),
+                Text(
+                  "Login",
+                  style: TextStyle(fontSize: 30),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: TextField(
-                    controller: email,
+                    controller: validateEmail(email),
                     decoration: InputDecoration(
                         labelText: "email",
                         labelStyle: TextStyle(color: Colors.grey),
@@ -59,13 +107,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderSide: BorderSide(color: Colors.green))),
                   ),
                 ),
+                hint ? Container() : Container(
+                  padding: EdgeInsets.only(left: 20),
+                  alignment: Alignment.topLeft,
+                  child: Text(hintText,style: TextStyle(color: Colors.red),)),
                 SizedBox(
                   height: 20,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: TextField(
-                    controller: password,
+                    controller: validatePassword(password),
                     obscureText: passwordVisibility,
                     decoration: InputDecoration(
                         labelText: "Password",
@@ -88,28 +140,43 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide(color: Colors.green))),
                   ),
-
                 ),
-                SizedBox(height: 15,),
+                hint ? Container() : Container(
+                  padding: EdgeInsets.only(left: 20),
+                  alignment: Alignment.topLeft,
+                  child: Text(hintText,style: TextStyle(color: Colors.red),)),
+                SizedBox(
+                  height: 15,
+                ),
                 SizedBox(
                   width: double.infinity,
                   child: Container(
-                    padding: EdgeInsets.only(left: 20,right: 20),
-                    child: ElevatedButton(onPressed: (){
-                      login();
-                    }, child: Text("Login")),
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          hintText = "Field should not be Empty";
+                            login();
+                        },
+                        child: Text("Login")),
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account?  ",style: TextStyle(color: Colors.grey),),
+                    Text(
+                      "Don't have an account?  ",
+                      style: TextStyle(color: Colors.grey),
+                    ),
                     InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RegisterScreen()));
-                      },
-                      child: Text("Register now"))
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterScreen()));
+                        },
+                        child: Text("Register now"))
                   ],
                 )
               ],
@@ -119,6 +186,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-  
-  
 }

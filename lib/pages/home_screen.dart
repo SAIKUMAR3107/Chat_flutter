@@ -102,8 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
         return ListView(
           padding: EdgeInsets.all(10),
           children: snapshot.data!.map<Widget>((userData) {
-            
-            
             if(userData["email"] != authService.getCurrentUser()!.email){
               return GestureDetector(
               onTap: (){

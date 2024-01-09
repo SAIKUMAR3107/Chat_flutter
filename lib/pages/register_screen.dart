@@ -1,7 +1,6 @@
 import 'package:chatting_app/pages/home_screen.dart';
 import 'package:chatting_app/pages/login_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../services/authentication/auth_service.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -19,23 +18,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void register() {
     var auth = AuthService();
-    if(password.text == cnfPassword.text){
-      try{
+    if (password.text == cnfPassword.text) {
+      try {
         auth.signUpWithEmailPassword(email.text, password.text);
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
-
-      }catch (e) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomeScreen()));
+      } catch (e) {
         showDialog(
-          context: context, 
-          builder: (context) => AlertDialog(title: Text(e.toString()),));
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(e.toString()),
+                ));
       }
-    }
-    else{
+    } else {
       showDialog(
-          context: context, 
-          builder: (context) => AlertDialog(title: Text("Password should be same"),));
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text("Password should be same"),
+              ));
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,8 +50,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Register",style: TextStyle(fontSize: 30),),
-                SizedBox(height: 30,),
+                Text(
+                  "Register",
+                  style: TextStyle(fontSize: 30),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: TextField(
@@ -64,7 +72,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             borderSide: BorderSide(color: Colors.green))),
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: TextField(
@@ -92,7 +102,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             borderSide: BorderSide(color: Colors.green))),
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: TextField(
@@ -120,26 +132,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             borderSide: BorderSide(color: Colors.green))),
                   ),
                 ),
-                SizedBox(height: 15,),
+                SizedBox(
+                  height: 15,
+                ),
                 SizedBox(
                   width: double.infinity,
                   child: Container(
-                    padding: EdgeInsets.only(left: 20,right: 20),
-                    child: ElevatedButton(onPressed: (){
-                        register();
-                    }, child: Text("Register")),
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          register();
+                        },
+                        child: Text("Register")),
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already have an account?  ",style: TextStyle(color: Colors.grey),),
+                    Text(
+                      "Already have an account?  ",
+                      style: TextStyle(color: Colors.grey),
+                    ),
                     InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
-                      },
-                      child: Text("Login"))
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()));
+                        },
+                        child: Text("Login"))
                   ],
                 )
               ],
