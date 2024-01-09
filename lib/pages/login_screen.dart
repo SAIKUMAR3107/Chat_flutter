@@ -68,6 +68,10 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     //catch any Error
     catch (e) {
+      setState(() {
+        hint = false;
+        hintText = "Field should not be empty";
+      });
       showDialog(
           context: context,
           builder: (context) => AlertDialog(title: Text(e.toString())));
