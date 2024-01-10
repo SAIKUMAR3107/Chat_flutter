@@ -28,9 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    shared();
+    
     Timer(Duration(seconds: 3), () { 
-      
+      shared();
       
     });
   }
